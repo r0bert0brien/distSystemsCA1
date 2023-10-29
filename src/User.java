@@ -1,9 +1,11 @@
-
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,7 +16,9 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Transaction> transactions;
 	private String userID;
 	private String userName;
 	private String phoneNumber;
@@ -32,6 +36,14 @@ public class User {
 	public User() {
 		
 	}
+	
+	public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 	
 	public String getUserID() {
 		return userID;

@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -8,7 +7,7 @@ import javax.persistence.Persistence;
 	public class UserDAO {
 		
 		protected static EntityManagerFactory emf = 
-		Persistence.createEntityManagerFactory("RobertPU");
+		Persistence.createEntityManagerFactory("dbca");
 
 		public UserDAO() {
 			// TODO Auto-generated constructor stub
@@ -54,14 +53,23 @@ import javax.persistence.Persistence;
 		public User getUserByName(String userName) {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			User u = em.createQuery("SELECT p FROM User p WHERE u.userName = :userName", User.class)
-	                .setParameter("userName", userName)
+			User u = em.createQuery("SELECT p FROM User p WHERE p.userName = :userName", User.class)
+	                .setParameter("employeeName", userName)
 	                .getSingleResult();
 			em.getTransaction().commit();
 			em.close();
 			return u;
 		}
 		
+		public List<Transaction> getTransactionsForUser(String userId) {
+		    EntityManager em = emf.createEntityManager();
+		        em.getTransaction().begin();
+		        User user = em.find(User.class, userId);
+		        List<Transaction> transactions = user.getTransactions();
+		        em.getTransaction().commit();
+		        return transactions;
+		   
+		}
 
 
 	}
