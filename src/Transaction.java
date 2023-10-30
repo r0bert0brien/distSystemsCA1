@@ -15,22 +15,23 @@ public class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int transactionID;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userID")
 	User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "loan_id")
+	@JoinColumn(name = "loanID")
 	Loan loan;
 	
-	private String transactionUserID;
-	private String transactionLoanID;
+	private int transactionUserID;
+	private int transactionLoanID;
 	private String date;
-	private String amount;
+	private int amount;
 	
-	public Transaction(String transactionUserID, String transactionLoanID, String date, String amount) {
+	public Transaction(int transactionID, int transactionUserID, int transactionLoanID, String date, int amount) {
+		this.transactionID = transactionID;
 		this.transactionUserID = transactionUserID;
 		this.transactionLoanID = transactionLoanID;
 		this.date = date;
@@ -40,21 +41,45 @@ public class Transaction {
 	public Transaction() {
 		
 	}
+	
+	public User getUser() {
+		return user;
+	}
 
-	public String getTransactionUserID() {
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+	public int getTransactionID() {
+		return transactionID;
+	}
+
+	public void setTransactionID(int transactionID) {
+		this.transactionID = transactionID;
+	}
+
+	public int getTransactionUserID() {
 		return user.getUserID();
 	}
 
-	public void setTransactionUserID(String transactionUserID) {
+	public void setTransactionUserID(int transactionUserID) {
 		this.transactionUserID = transactionUserID;
 		user.setUserID(transactionUserID);
 	}
 
-	public String getTransactionLoanID() {
+	public int getTransactionLoanID() {
 		return loan.getLoanID();
 	}
 
-	public void setTransactionLoanID(String transactionLoanID) {
+	public void setTransactionLoanID(int transactionLoanID) {
 		this.transactionLoanID = transactionLoanID;
 		loan.setLoanID(transactionLoanID);
 	}
@@ -67,11 +92,11 @@ public class Transaction {
 		this.date = date;
 	}
 
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 

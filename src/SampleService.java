@@ -17,18 +17,6 @@ import javax.ws.rs.Produces;
 public class SampleService {
 	
 	private static Map<String, User> users = new HashMap<String, User>();
-	
-	static {
-		
-        User user1 = new User();
-        user1.setUserID("1");
-        user1.setUserName("Robert");
-        user1.setPhoneNumber("0871234567");
-        user1.setAddress("1 Fairview Road");
-        user1.setAnnualSalary(50000);
-        users.put(user1.getUserID(), user1);
-        
-    }
 
 	@GET
     @Path("/hello")

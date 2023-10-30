@@ -1,6 +1,7 @@
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,17 +15,15 @@ public class Loan {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int loanID;
 	
-	@OneToMany(mappedBy = "loan")
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER) 
     private List<Transaction> transactions;
 	
-	private String loanID;
 	private String loanReason;
 	private int loanAmount; 
 	
-	public Loan(String loanID, String loanReason, int loanAmount) {
-		this.loanID = loanID;
+	public Loan(String loanReason, int loanAmount) {
 		this.loanReason = loanReason;
 		this.loanAmount = loanAmount;
 	}
@@ -41,11 +40,11 @@ public class Loan {
         this.transactions = transactions;
     }
 
-	public String getLoanID() {
+	public int getLoanID() {
 		return loanID;
 	}
 
-	public void setLoanID(String loanID) {
+	public void setLoanID(int loanID) {
 		this.loanID = loanID;
 	}
 

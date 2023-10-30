@@ -15,23 +15,22 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int userID;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Transaction> transactions;
-	private String userID;
 	private String userName;
 	private String phoneNumber;
 	private String address;
 	private int annualSalary;
 	
-	public User(String userID, String userName, String phoneNumber, String address, int annualSalary) {
-		this.userID = userID;
-		this.userName = userName;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.annualSalary = annualSalary;
+	public User(String userName, String phoneNumber, String address, int annualSalary) {
+	    this.userName = userName;
+	    this.phoneNumber = phoneNumber;
+	    this.address = address;
+	    this.annualSalary = annualSalary;
 	}
+
 	
 	public User() {
 		
@@ -45,11 +44,11 @@ public class User {
         this.transactions = transactions;
     }
 	
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 

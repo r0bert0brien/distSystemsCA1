@@ -4,68 +4,68 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-	public class UserDAO {
+	public class LoanDAO {
 		
 		protected static EntityManagerFactory emf = 
 		Persistence.createEntityManagerFactory("dbca");
 
-		public UserDAO() {
+		public LoanDAO() {
 			// TODO Auto-generated constructor stub
 		}
 		 	
 
-		public void persist(User user2) {
+		public void persist(Loan loan) {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			em.persist(user2);
+			em.persist(loan);
 			em.getTransaction().commit();
 			em.close();
 		}
 		
-		public void removeUser(User user) {
+		public void removeLoan(Loan loan) {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			em.remove(em.merge(user));
+			em.remove(em.merge(loan));
 			em.getTransaction().commit();
 			em.close();
 		}
 		
-		public User merge(User user) {
+		public Loan merge(Loan loan) {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			User updatedUser = em.merge(user);
+			Loan updatedLoan = em.merge(loan);
 			em.getTransaction().commit();
 			em.close();
-			return updatedUser;
+			return updatedLoan;
 		}
 		
 		
-		public List<User> getAllUsers() {
+		public List<Loan> getAllLoans() {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			List<User> users = new ArrayList<User>();
-			users = em.createQuery("from User").getResultList();
+			List<Loan> loans = new ArrayList<Loan>();
+			loans = em.createQuery("from Loan").getResultList();
 			em.getTransaction().commit();
 			em.close();
-			return users;
+			return loans;
 		}
-
-		public User getUserByID(int userID) {
+		
+		public Loan getLoanByID(int loanID) {
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
-			User u = em.createQuery("SELECT p FROM User p WHERE p.userID = :userID", User.class)
-	                .setParameter("userID", userID)
+			Loan l = em.createQuery("SELECT p FROM Loan p WHERE p.loanID = :loanID", Loan.class)
+	                .setParameter("loanID", loanID)
 	                .getSingleResult();
 			em.getTransaction().commit();
 			em.close();
-			return u;
+			return l;
 		}
 		
-		public List<Transaction> getTransactionsForUser(String userId) {
+		public List<Transaction> getTransactionsForLoan(String loanID) {
 		    EntityManager em = emf.createEntityManager();
 		        em.getTransaction().begin();
-		        User user = em.find(User.class, userId);
-		        List<Transaction> transactions = user.getTransactions();
+		        Loan loan = em.find(Loan.class, loanID);
+		        List<Transaction> transactions = loan.getTransactions();
 		        em.getTransaction().commit();
 		        return transactions;
 		   
