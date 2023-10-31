@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -60,16 +62,5 @@ import javax.persistence.Persistence;
 			em.close();
 			return l;
 		}
-		
-		public List<Transaction> getTransactionsForLoan(String loanID) {
-		    EntityManager em = emf.createEntityManager();
-		        em.getTransaction().begin();
-		        Loan loan = em.find(Loan.class, loanID);
-		        List<Transaction> transactions = loan.getTransactions();
-		        em.getTransaction().commit();
-		        return transactions;
-		   
-		}
-
 
 	}

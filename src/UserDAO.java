@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -6,6 +8,7 @@ import javax.persistence.Persistence;
 
 	public class UserDAO {
 		
+		LoanDAO loandao = new LoanDAO();
 		protected static EntityManagerFactory emf = 
 		Persistence.createEntityManagerFactory("dbca");
 
@@ -39,6 +42,19 @@ import javax.persistence.Persistence;
 			return updatedUser;
 		}
 		
+		public Loan getLoanByUser(int userID) {
+	        EntityManager em = emf.createEntityManager();
+	        em.getTransaction().begin();
+	        
+	        User user = em.find(User.class, userID);
+	        int loan = user.getLoan();
+	        Loan nameOfLoan = loandao.getLoanByID(loan);
+	        
+	        em.getTransaction().commit();
+	        em.close();
+	        
+	        return nameOfLoan;
+	    }
 		
 		public List<User> getAllUsers() {
 			EntityManager em = emf.createEntityManager();

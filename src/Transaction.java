@@ -1,5 +1,7 @@
 
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,39 +11,29 @@ import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "transaction")
 @Entity
 public class Transaction {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int transactionID;
-	
-	@ManyToOne
-	@JoinColumn(name = "userID")
-	User user;
-	
-	@ManyToOne
-	@JoinColumn(name = "loanID")
-	Loan loan;
-	
-	private int transactionUserID;
-	private int transactionLoanID;
 	private String date;
 	private int amount;
-	
-	public Transaction(int transactionID, int transactionUserID, int transactionLoanID, String date, int amount) {
-		this.transactionID = transactionID;
-		this.transactionUserID = transactionUserID;
-		this.transactionLoanID = transactionLoanID;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public Transaction(String date, int amount) {
 		this.date = date;
 		this.amount = amount;
+		this.user = new User();
 	}
-	
+
 	public Transaction() {
-		
+
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -49,14 +41,6 @@ public class Transaction {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public Loan getLoan() {
-        return loan;
-    }
-
-    public void setLoan(Loan loan) {
-        this.loan = loan;
-    }
 
 	public int getTransactionID() {
 		return transactionID;
@@ -68,20 +52,6 @@ public class Transaction {
 
 	public int getTransactionUserID() {
 		return user.getUserID();
-	}
-
-	public void setTransactionUserID(int transactionUserID) {
-		this.transactionUserID = transactionUserID;
-		user.setUserID(transactionUserID);
-	}
-
-	public int getTransactionLoanID() {
-		return loan.getLoanID();
-	}
-
-	public void setTransactionLoanID(int transactionLoanID) {
-		this.transactionLoanID = transactionLoanID;
-		loan.setLoanID(transactionLoanID);
 	}
 
 	public String getDate() {
@@ -100,6 +70,6 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	
-	
+
+
 }
