@@ -36,8 +36,8 @@ public class SampleServiceDBCRUD {
     @POST
     @Path("/newtransaction")
     @Consumes("application/xml")
-    public String addtransactionToDBXML(Transaction transaction){
-        transactionDAO.persist(transaction); 
+    public String addtransactionToDBXML(Transaction transaction, int userID){
+        transactionDAO.persist(transaction, userID); 
         return "Transaction added to DB from XML Param " + transaction.getTransactionID();    
     }
     

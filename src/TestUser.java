@@ -1,7 +1,7 @@
 public class TestUser {
     //Hard Wired User
 	public TestUser() {
-        User user = new User("Brian", "0871234522", "1 Maryfeild Grove", 100);
+        User user = new User("Brian7", "0871234522", "1 Maryfeild Grove", 100);
         UserDAO userdao = new UserDAO(); 
         userdao.persist(user);
     }

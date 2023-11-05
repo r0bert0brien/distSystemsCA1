@@ -3,7 +3,7 @@ public class TestLoan {
 	public TestLoan() {
 		UserDAO userDAO = new UserDAO();
 		
-        User user = userDAO.getUserByID(1);
+        User user = userDAO.getUserByID(5);
         Loan loan = new Loan("A New Car", 1000, user);
         LoanDAO loandao = new LoanDAO(); 
         loandao.persist(loan);

@@ -15,9 +15,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Transaction {
 
 	@Id
+	@XmlElement
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int transactionID;
+	@XmlElement
 	private String date;
+	@XmlElement
 	private int amount;
 
 	@ManyToOne
@@ -34,38 +37,47 @@ public class Transaction {
 
 	}
 
+	@XmlElement
 	public User getUser() {
 		return user;
 	}
 
+	@XmlElement
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	@XmlElement
 	public int getTransactionID() {
 		return transactionID;
 	}
 
+	@XmlElement
 	public void setTransactionID(int transactionID) {
 		this.transactionID = transactionID;
 	}
 
+	@XmlElement
 	public int getTransactionUserID() {
 		return user.getUserID();
 	}
 
+	@XmlElement
 	public String getDate() {
 		return date;
 	}
 
+	@XmlElement
 	public void setDate(String date) {
 		this.date = date;
 	}
 
+	@XmlElement
 	public int getAmount() {
 		return amount;
 	}
 
+	@XmlElement
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}

@@ -14,10 +14,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 public class Loan {
+	
 	@Id
+	@XmlElement
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loanID;
+	@XmlElement
 	private String loanReason;
+	@XmlElement
 	private int loanAmount;
 
 	@OneToOne
@@ -34,34 +38,42 @@ public class Loan {
 
 	}
 
+	@XmlElement
 	public User getUser() {
 		return user;
 	}
 
+	@XmlElement
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	@XmlElement
 	public int getLoanID() {
 		return loanID;
 	}
 
+	@XmlElement
 	public void setLoanID(int loanID) {
 		this.loanID = loanID;
 	}
 
+	@XmlElement
 	public String getLoanReason() {
 		return loanReason;
 	}
 
+	@XmlElement
 	public void setLoanReason(String loanReason) {
 		this.loanReason = loanReason;
 	}
 
+	@XmlElement
 	public int getLoanAmount() {
 		return loanAmount;
 	}
 
+	@XmlElement
 	public void setLoanAmount(int loanAmount) {
 		this.loanAmount = loanAmount;
 	}
