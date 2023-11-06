@@ -40,24 +40,25 @@ public class TransactionDAO {
 
 
 
-	public void removeTransaction(Transaction transaction, int userID) {
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction et = em.getTransaction();
-		et.begin();
+	public void removeTransaction(Transaction transaction, int userID, int loanID) {
+	    EntityManager em = emf.createEntityManager();
+	    EntityTransaction et = em.getTransaction();
+	    et.begin();
 
-		User user = em.find(User.class, userID);
-        int loan = user.getLoan();
-        Loan nameOfLoan = loandao.getLoanByID(loan);
+	    User user = em.find(User.class, userID);
+	    int loan = user.getLoan();
+	    Loan nameOfLoan = loandao.getLoanByID(loan);
 
-		int newLoanAmount = nameOfLoan.getLoanAmount() + transaction.getAmount();
-		nameOfLoan.setLoanAmount(newLoanAmount);
+	    int newLoanAmount = nameOfLoan.getLoanAmount() + transaction.getAmount();
+	    nameOfLoan.setLoanAmount(newLoanAmount);
 
-		em.merge(nameOfLoan);
-		em.remove(transaction);
+	    em.merge(nameOfLoan);
+	    em.remove(transaction);
 
-		et.commit();
-		em.close();
+	    et.commit();
+	    em.close();
 	}
+
 
 	public List<Transaction> getAllTransactions() {
 		EntityManager em = emf.createEntityManager();
@@ -69,7 +70,7 @@ public class TransactionDAO {
 		return transactions;
 	}
 
-	public Transaction getTransactionByID(String transactionID) {
+	public Transaction getTransactionByID(int transactionID) {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		Transaction t = em.createQuery("SELECT p FROM Transaction p WHERE p.transactionID = :transactionID", Transaction.class)
